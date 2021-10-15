@@ -1,0 +1,71 @@
+package com.company;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class Main {
+    public Main() {
+    }
+
+    public static Main.Segment solveProblem(List<Main.Segment> segments) {
+        ArrayList<coordinates> coordinates = new ArrayList();
+        Iterator var2 = segments.iterator();
+
+        while(var2.hasNext()) {
+            Main.Segment i = (Main.Segment)var2.next();
+            coordinates.add(new coordinates(i.start, in.B));
+            coordinates.add(new coordinates(i.end, in.E));
+        }
+
+        int n = 0;
+        int MaxN = 0;
+        ArrayList<coordinates> list = QuickSort.sort(coordinates);
+        Main.Segment res = new Main.Segment(((coordinates)list.get(0)).value, 0);
+        Iterator var6 = list.iterator();
+
+        while(var6.hasNext()) {
+            coordinates i = (coordinates)var6.next();
+            if (i.in == in.B) {
+                ++n;
+            }
+
+            if (i.in == in.E) {
+                --n;
+                if (MaxN < n) {
+                    res.start = i.value;
+                }
+            }
+
+            if (MaxN < n) {
+                MaxN = n;
+                res.end = i.value;
+            }
+        }
+
+        return res;
+    }
+
+    public static void main(String[] args) throws Exception {
+        ArrayList<Main.Segment> s = new ArrayList();
+        s.add(new Main.Segment(-3, 1));
+        s.add(new Main.Segment(-4, 1));
+        s.add(new Main.Segment(2, 5));
+        s.add(new Main.Segment(1, 6));
+        s.add(new Main.Segment(1, 2));
+        s.add(new Main.Segment(0, 3));
+        s.add(new Main.Segment(4, 5));
+        Main.Segment R = solveProblem(s);
+        System.out.println(R.start + " " + R.end);
+    }
+
+    static class Segment {
+        public int start;
+        public int end;
+
+        public Segment(int start, int end) {
+            this.end = end;
+            this.start = start;
+        }
+    }
+}
