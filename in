@@ -1,0 +1,7 @@
+public enum in {
+    B,
+    E;
+
+    private in() {
+    }
+}
